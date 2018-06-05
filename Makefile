@@ -1,14 +1,14 @@
 ROLLUP=node_modules/.bin/rollup
 INFOLOG := \033[34m ▸\033[0m
 
-page.js: index.js
-	@echo "$(INFOLOG) Building page.js.."
+react-pagejs.js: index.js
+	@echo "$(INFOLOG) Building react-pagejs.js.."
 	@$(ROLLUP) -c rollup.config.js
 
 watch:
-	find index.js | entr make page.js
+	find index.js | entr make react-pagejs.js
 .PHONY: watch
 
 clean:
-	@rm page.js
+	@rm react-pagejs.js
 .PHONY: clean

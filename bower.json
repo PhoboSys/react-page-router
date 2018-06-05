@@ -1,11 +1,11 @@
 {
-  "name": "page",
+  "name": "react-pagejs",
   "description": "Tiny client-side router",
   "keywords": ["page", "route", "router", "routes", "pushState"],
-  "main": "page.js",
+  "main": "react-pagejs.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/visionmedia/page.js"
+    "url": "git://github.com/PhoboSys/page.js.git"
   },
   "ignore": [
     ".gitignore",

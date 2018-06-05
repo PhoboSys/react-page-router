@@ -12,7 +12,7 @@
       "page": "index.js"
     }
   },
-  "browser": "page.js",
+  "browser": "react-pagejs.js",
   "scripts": {
     "engine-deps": "install-engine-dependencies",
     "test": "jshint index.js test/tests.js && mocha test/tests.js",
@@ -51,6 +51,6 @@
   },
   "files": [
     "index.js",
-    "page.js"
+    "react-pagejs.js"
   ]
 }

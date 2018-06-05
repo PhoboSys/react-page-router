@@ -22,7 +22,7 @@ page('/user/:name', show);
 page('*', notfound);
 page();
 
-// everything below is not part of page.js
+// everything below is not part of react-pagejs.js
 // just callbacks etc..
 
 document.querySelector('#cycle').onclick = function(e){

@@ -11,7 +11,7 @@ page('/user/:name', load, show);
 page('*', notfound);
 page();
 
-// everything below is not part of page.js
+// everything below is not part of react-pagejs.js
 // just callbacks etc..
 
 function text(str) {

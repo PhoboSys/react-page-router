@@ -27,11 +27,11 @@ var examples = fs.readdirSync(__dirname).filter(function(file){
 // routes
 
 /**
- * GET page.js
+ * GET react-pagejs.js
  */
 
-app.get('/page.js', function(req, res){
-  res.sendFile(join(__dirname, '..', 'page.js'));
+app.get('/react-pagejs.js', function(req, res){
+  res.sendFile(join(__dirname, '..', 'react-pagejs.js'));
 });
 
 /**
