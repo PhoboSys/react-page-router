@@ -4,9 +4,9 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 export default {
   input: 'index.js',
   output: {
-    file: 'react-pagejs.js',
+    file: 'dist/react-pagejs.js',
     format: 'umd',
-    name: 'page'
+    name: 'react-pagejs'
   },
   plugins: [
     nodeResolve({

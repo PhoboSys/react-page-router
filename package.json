@@ -9,10 +9,10 @@
   },
   "component": {
     "scripts": {
-      "page": "index.js"
+      "react-pagejs": "index.js"
     }
   },
-  "browser": "react-pagejs.js",
+  "browser": "react-pagejs",
   "scripts": {
     "engine-deps": "install-engine-dependencies",
     "test": "jshint index.js test/tests.js && mocha test/tests.js",
@@ -51,6 +51,6 @@
   },
   "files": [
     "index.js",
-    "react-pagejs.js"
+    "dist/react-pagejs.js"
   ]
 }
