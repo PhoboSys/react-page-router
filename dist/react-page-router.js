@@ -7045,7 +7045,7 @@ module.exports = findIndex;
    * Module exports.
    */
 
-  var reactPagejs = page;
+  var app = page;
   page.default = page;
   page.Context = Context;
   page.Route = Route;
@@ -7775,6 +7775,6 @@ module.exports = findIndex;
 
   page.sameOrigin = sameOrigin;
 
-return reactPagejs;
+return app;
 
 })));
