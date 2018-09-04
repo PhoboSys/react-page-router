@@ -39,7 +39,7 @@ export function transitionRoutingMiddlewares (routingBranch) {
 }
 
 function callTransitionHook(context, routeName, hookName) {
-  var callback = get(context,`refs.${routeName}.${hookName}`)
+  var callback = get(context, ['refs', routeName, hookName])
   if (callback && typeof callback === "function") {
     callback()
   }
@@ -99,7 +99,7 @@ function createRouteComponentTransitionMiddleware (routemap) {
     context.component = React.createElement(
       routemap.component,
       {
-        ref: ref => { if (ref) context.refs[routemap.name] = ref },
+        ref: function (ref) { if (ref) context.refs[routemap.name] = ref },
       }, element
     )
 
