@@ -53,33 +53,32 @@ function createRouteComponentTransitionMiddleware (routemap) {
         ? routemap.transition
         : {}
 
-      var childTransition = get(find(routemap.children,
-        ['name', context.names[0]]), "transition")
+      var childRoutename = context.names[0]
+      var childRoutemap = find(routemap.children, ['name', childRoutename])
+      var childTransition = get(childRoutemap, "transition")
 
       var transition = defaults(
-        {
-          key: context.names[0]
-        },
+        { key: childRoutename },
         childTransition,
         parentTransition,
         {
           onEnter: function () {
-            callTransitionHook(context, context.names[0], "componentWillEnter")
+            callTransitionHook(context, childRoutename, "componentWillEnter")
           },
           onEntering: function () {
-            callTransitionHook(context, context.names[0], "componentEntering")
+            callTransitionHook(context, childRoutename, "componentEntering")
           },
           onEntered: function () {
-            callTransitionHook(context, context.names[0], "componentDidEnter")
+            callTransitionHook(context, childRoutename, "componentDidEnter")
           },
           onExit: function () {
-            callTransitionHook(context, context.names[0], "componentWillExit")
+            callTransitionHook(context, childRoutename, "componentWillExit")
           },
           onExiting: function () {
-            callTransitionHook(context, context.names[0], "componentExiting")
+            callTransitionHook(context, childRoutename, "componentExiting")
           },
           onExited: function () {
-            callTransitionHook(context, context.names[0], "componentDidExit")
+            callTransitionHook(context, childRoutename, "componentDidExit")
           }
         },
         _cssTransitionDefaults
