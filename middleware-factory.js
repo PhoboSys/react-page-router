@@ -38,10 +38,18 @@ export function transitionRoutingMiddlewares (routingBranch) {
   )
 }
 
-function callTransitionHook(context, routeName, hookName) {
-  var callback = get(context, ['refs', routeName, hookName])
-  if (callback && typeof callback === "function") {
-    callback()
+function refMethod(context, refName, method) {
+  return function () {
+    var ref = get(context, ['refs', refName])
+
+    // getWrappedInstance needed for redux connect case
+    if (ref && typeof ref.getWrappedInstance === "function") {
+      ref = ref.getWrappedInstance()
+    }
+
+    if (ref && typeof ref[method] === "function") {
+      ref[method]()
+    }
   }
 }
 
@@ -49,9 +57,7 @@ function createRouteComponentTransitionMiddleware (routemap) {
   return function (context, next) {
     var element = context.component
     if (size(routemap.children) > 0 && routemap.transition) {
-      var parentTransition = typeof routemap.transition === 'object'
-        ? routemap.transition
-        : {}
+      var parentTransition = get(routemap, "transition")
 
       var childRoutename = context.names[0]
       var childRoutemap = find(routemap.children, ['name', childRoutename])
@@ -62,24 +68,12 @@ function createRouteComponentTransitionMiddleware (routemap) {
         childTransition,
         parentTransition,
         {
-          onEnter: function () {
-            callTransitionHook(context, childRoutename, "componentWillEnter")
-          },
-          onEntering: function () {
-            callTransitionHook(context, childRoutename, "componentEntering")
-          },
-          onEntered: function () {
-            callTransitionHook(context, childRoutename, "componentDidEnter")
-          },
-          onExit: function () {
-            callTransitionHook(context, childRoutename, "componentWillExit")
-          },
-          onExiting: function () {
-            callTransitionHook(context, childRoutename, "componentExiting")
-          },
-          onExited: function () {
-            callTransitionHook(context, childRoutename, "componentDidExit")
-          }
+          onEnter: refMethod(context, childRoutename, "componentWillEnter"),
+          onEntering: refMethod(context, childRoutename, "componentEntering"),
+          onEntered: refMethod(context, childRoutename, "componentDidEnter"),
+          onExit: refMethod(context, childRoutename, "componentWillExit"),
+          onExiting: refMethod(context, childRoutename, "componentExiting"),
+          onExited: refMethod(context, childRoutename, "componentDidExit")
         },
         _cssTransitionDefaults
       )
