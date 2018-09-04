@@ -1,7 +1,7 @@
 {
   "name": "react-page-router",
   "description": "Tiny client-side router",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "license": "MIT",
   "main": "./dist/react-page-router.js",
   "repository": {
@@ -53,7 +53,6 @@
     "rollup": "^0.57.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.2",
-    "rollup-plugin-uglify": "^4.0.0",
     "serve": "*",
     "should": "*"
   },
