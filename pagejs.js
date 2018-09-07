@@ -434,7 +434,13 @@
 
   function Context(path, state) {
     var pageBase = getBase();
-    if ('/' === path[0] && 0 !== path.indexOf(pageBase)) path = pageBase + (hashbang ? '#!' : '') + path;
+
+    if (hashbang) {
+      path = pageBase + '#!' + path;
+    } else if ('/' === path[0] && 0 !== path.indexOf(pageBase)) {
+      path = pageBase + path;
+    }
+
     var i = path.indexOf('?');
 
     this.canonicalPath = path;
