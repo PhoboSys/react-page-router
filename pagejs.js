@@ -435,18 +435,18 @@
   function Context(path, state) {
     var pageBase = getBase();
 
-    if (hashbang) {
-      path = pageBase + '#!' + path;
-    } else if ('/' === path[0] && 0 !== path.indexOf(pageBase)) {
-      path = pageBase + path;
-    }
-
+    if ('/' === path[0] && 0 !== path.indexOf(pageBase)) path = pageBase + (hashbang ? '#!' : '') + path;
+    if (hashbang && !~path.indexOf('#!')) path = pageBase + '#!' + path;
     var i = path.indexOf('?');
 
     this.canonicalPath = path;
-    this.path = path.replace(pageBase, '') || '/';
-    if (hashbang) this.path = this.path.replace('#!', '') || '/';
+    this.path = (0 === path.indexOf(pageBase))
+      ? path.replace(pageBase, '')
+      : path;
 
+    if (hashbang) this.path = this.path.replace('#!', '');
+
+    this.path = this.path || '/';
     this.title = (hasDocument && pageWindow.document.title);
     this.state = state || {};
     this.state.path = path;
