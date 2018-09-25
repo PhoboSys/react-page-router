@@ -24,6 +24,7 @@ function createRouteTransitionMiddleware (routingBranch) {
   var routemap = last(routingBranch)
   return function (context, next) {
     context.name = routemap.name
+    context.route = routemap
     context.names = []
     context.refs = {}
     next()
