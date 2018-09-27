@@ -42,13 +42,14 @@ function PageRouter (routesTree, middlewares, renderer, config) {
   }
 
   function _registerRoute (routeBranch) {
+    var routepath = _generatePath(routeBranch)
     var args = concat(
-      [_generatePath(routeBranch)],
-      transitionRoutingMiddlewares(routeBranch),
+      [routepath],
+      transitionRoutingMiddlewares(routepath, routeBranch),
       _middlewares,
       transitionRenderingMiddleware(_renderer)
     )
-    Reflect.apply(PageRouter.page, PageRouter.page, args)
+    PageRouter.page.apply(PageRouter.page, args)
   }
 
   function _registerRouteBranch (routeBranch, routemap) {
@@ -56,7 +57,7 @@ function PageRouter (routesTree, middlewares, renderer, config) {
     if (size(routemap.children) > 0) {
       each(
         routemap.children,
-        function(route) {
+        function (route) {
           return _registerRouteBranch(routeBranch, route)
         }
       )

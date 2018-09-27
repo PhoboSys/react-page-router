@@ -20,20 +20,21 @@ var _cssTransitionDefaults = {
   timeout: 1000
 }
 
-function createRouteTransitionMiddleware (routingBranch) {
+function createRouteTransitionMiddleware (routepath, routingBranch) {
   var routemap = last(routingBranch)
   return function (context, next) {
     context.name = routemap.name
     context.route = routemap
+    context.routepath = routepath
     context.names = []
     context.refs = {}
     next()
   }
 }
 
-export function transitionRoutingMiddlewares (routingBranch) {
+export function transitionRoutingMiddlewares (routepath, routingBranch) {
   return [
-    createRouteTransitionMiddleware(routingBranch)
+    createRouteTransitionMiddleware(routepath, routingBranch)
   ].concat(
     map(reverse(routingBranch), createRouteComponentTransitionMiddleware)
   )
