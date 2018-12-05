@@ -1,29 +1,22 @@
 {
   "name": "react-page-router",
   "description": "Tiny client-side router",
-  "version": "1.11.8",
+  "version": "1.11.9",
   "license": "MIT",
   "main": "./dist/react-page-router.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/PhoboSys/react-page-router.git"
   },
-  "component": {
-    "scripts": {
-      "react-page-router": "react-router.js"
-    }
-  },
   "browser": "react-page-router",
   "scripts": {
-    "engine-deps": "install-engine-dependencies",
-    "test": "jshint pagejs.js test/tests.js && mocha test/tests.js",
-    "serve": "serve test",
-    "test-cov": "jscoverage pagejs.js pagejs-cov.js; PAGE_COV=1 mocha test/tests.js -R html-cov > coverage.html",
-    "make": "rollup -c rollup.config.js"
+    "build": "webpack --mode production"
+  },
+  "peerDependencies": {
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0"
   },
   "dependencies": {
-    "react": "15.5.1",
-    "react-dom": "15.5.4",
     "react-transition-group": "2.4.0",
     "lodash.map": "4.6.0",
     "lodash.reverse": "4.0.1",
@@ -40,30 +33,8 @@
     "path-to-regexp": "~1.2.1"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
-    "coveralls": "^2.11.2",
-    "engine-dependencies": "^0.2.0",
-    "express": "^4.10.2",
-    "jade": "^1.7.0",
-    "jscoverage": "^0.5.9",
-    "jsdom": "^11.5.1",
-    "jshint": "^2.5.10",
-    "mocha": "^2.0.1",
-    "mocha-lcov-reporter": "0.0.1",
-    "rollup": "^0.57.0",
-    "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-node-resolve": "^3.0.2",
-    "serve": "*",
-    "should": "*"
-  },
-  "engineDependencies": {
-    "node": {
-      "0.10.x": {
-        "devDependencies": {
-          "jsdom": "^1.3.1"
-        }
-      }
-    }
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
   },
   "files": [
     "index.js",

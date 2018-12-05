@@ -20,5 +20,5 @@ ADD ./*.json /app/
 RUN npm install
 ADD ./*.js /app/
 
-CMD ["npm", "run", "make"]
+CMD ["npm", "run", "build"]
 
