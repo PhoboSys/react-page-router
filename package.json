@@ -37,7 +37,6 @@
     "webpack-cli": "^3.1.1"
   },
   "files": [
-    "index.js",
     "dist/react-page-router.js"
   ]
 }
