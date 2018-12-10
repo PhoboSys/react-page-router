@@ -1,11 +1,10 @@
 import React from 'react'
 
-import map from 'lodash.map'
+import each from 'lodash.foreach'
 import reverse from 'lodash.reverse'
 import last from 'lodash.last'
 import defaults from 'lodash.defaults'
 import size from 'lodash.size'
-import find from 'lodash.find'
 import get from 'lodash.get'
 
 import qs from 'qs'
@@ -33,10 +32,14 @@ function createRouteTransitionMiddleware (routepath, routingBranch) {
 }
 
 export function transitionRoutingMiddlewares (routepath, routingBranch) {
+  var arr = []
+  each(reverse(routingBranch), function (routemap) {
+    arr.push(createRouteComponentTransitionMiddleware(routemap))
+  })
   return [
     createRouteTransitionMiddleware(routepath, routingBranch)
   ].concat(
-    map(reverse(routingBranch), createRouteComponentTransitionMiddleware)
+    arr
   )
 }
 
@@ -61,8 +64,17 @@ function createRouteComponentTransitionMiddleware (routemap) {
     if (size(routemap.children) > 0 && routemap.transition) {
       var parentTransition = get(routemap, "transition")
 
+      var childRoutemap = null
       var childRoutename = context.names[0]
-      var childRoutemap = find(routemap.children, ['name', childRoutename])
+      each(
+        routemap.children,
+        function(route) {
+          if (route.name === childRoutename && childRoutemap === null) {
+            childRoutemap = route
+            return childRoutemap
+          }
+        }
+      )
       var childTransition = get(childRoutemap, "transition")
 
       var transition = defaults(

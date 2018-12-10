@@ -1,4 +1,3 @@
-import map from 'lodash.map'
 import trim from 'lodash.trim'
 import each from 'lodash.foreach'
 import size from 'lodash.size'
@@ -29,14 +28,14 @@ function PageRouter (routesTree, middlewares, renderer, config) {
   }
 
   function _generatePath (routeBranch) {
-    var path = compact(
-      map(
-        routeBranch,
-        function(pmap) {
-          return trim(pmap.path, '/')
-        }
-      )
-    ).join('/')
+    var arr = []
+    each(
+      routeBranch,
+      function(route) {
+        arr.push(trim(route.path, '/'))
+      }
+    )
+    var path = compact(arr).join('/')
 
     return '/' + path
   }
@@ -58,7 +57,7 @@ function PageRouter (routesTree, middlewares, renderer, config) {
       each(
         routemap.children,
         function (route) {
-          return _registerRouteBranch(routeBranch, route)
+          _registerRouteBranch(routeBranch, route)
         }
       )
     } else {
@@ -72,7 +71,7 @@ function PageRouter (routesTree, middlewares, renderer, config) {
     each(
       _routesTree,
       function(route) {
-        return _registerRouteBranch([], route)
+        _registerRouteBranch([], route)
       }
     )
 
