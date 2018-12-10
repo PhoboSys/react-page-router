@@ -5,6 +5,8 @@ import concat from 'lodash.concat'
 import compact from 'lodash.compact'
 import defaults from 'lodash.defaults'
 
+import { map } from './utils'
+
 import pagejs from './pagejs'
 import {
   transitionRenderingMiddleware,
@@ -28,14 +30,14 @@ function PageRouter (routesTree, middlewares, renderer, config) {
   }
 
   function _generatePath (routeBranch) {
-    var arr = []
-    each(
-      routeBranch,
-      function(route) {
-        arr.push(trim(route.path, '/'))
-      }
-    )
-    var path = compact(arr).join('/')
+    var path = compact(
+      map(
+        routeBranch,
+        function(pmap) {
+          return trim(pmap.path, '/')
+        }
+      )
+    ).join('/')
 
     return '/' + path
   }
