@@ -1,10 +1,11 @@
-import map from 'lodash.map'
 import trim from 'lodash.trim'
 import each from 'lodash.foreach'
 import size from 'lodash.size'
 import concat from 'lodash.concat'
 import compact from 'lodash.compact'
 import defaults from 'lodash.defaults'
+
+import { map } from './utils'
 
 import pagejs from './pagejs'
 import {
@@ -58,7 +59,7 @@ function PageRouter (routesTree, middlewares, renderer, config) {
       each(
         routemap.children,
         function (route) {
-          return _registerRouteBranch(routeBranch, route)
+          _registerRouteBranch(routeBranch, route)
         }
       )
     } else {
@@ -72,7 +73,7 @@ function PageRouter (routesTree, middlewares, renderer, config) {
     each(
       _routesTree,
       function(route) {
-        return _registerRouteBranch([], route)
+        _registerRouteBranch([], route)
       }
     )
 

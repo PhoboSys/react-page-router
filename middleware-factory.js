@@ -1,12 +1,11 @@
 import React from 'react'
 
-import map from 'lodash.map'
 import reverse from 'lodash.reverse'
 import last from 'lodash.last'
 import defaults from 'lodash.defaults'
 import size from 'lodash.size'
-import find from 'lodash.find'
 import get from 'lodash.get'
+import { map, find } from './utils'
 
 import qs from 'qs'
 
@@ -62,7 +61,7 @@ function createRouteComponentTransitionMiddleware (routemap) {
       var parentTransition = get(routemap, "transition")
 
       var childRoutename = context.names[0]
-      var childRoutemap = find(routemap.children, ['name', childRoutename])
+      var childRoutemap = find(routemap.children, function(route) { route.name === childRoutename })
       var childTransition = get(childRoutemap, "transition")
 
       var transition = defaults(
