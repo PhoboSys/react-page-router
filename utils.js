@@ -1,13 +1,15 @@
-export function map(array, callback) {
+import each from 'lodash.foreach'
+
+export function map(array, mapper) {
   var arr = []
-  each(array, function (value, key) { arr.push(callback(value, key)) })
+  each(array, function (value, key) { arr.push(mapper(value, key)) })
   return arr
 }
 
-export function find(array, callback) {
+export function find(array, predicate) {
   var result = null
   each(array, function (value, key) {
-    if (callback(value, key) && result === null) {
+    if (predicate(value, key) && result === null) {
       result = value
     }
   })

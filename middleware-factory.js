@@ -1,6 +1,5 @@
 import React from 'react'
 
-import each from 'lodash.foreach'
 import reverse from 'lodash.reverse'
 import last from 'lodash.last'
 import defaults from 'lodash.defaults'
