@@ -26,6 +26,7 @@
   var hasWindow = ('undefined' !== typeof window);
   var hasHistory = ('undefined' !== typeof history);
   var hasProcess = typeof process !== 'undefined';
+  var isIE11 = (!!window.MSInputMethodContext && !!document.documentMode);
 
   /**
    * Detect click event
@@ -201,6 +202,10 @@
     }
     hashbang = !!options.hashbang;
     if(hashbang && hasWindow && !hasHistory) {
+      pageWindow.addEventListener('hashchange', onpopstate, false);
+    }
+    if (hashbang && hasWindow && isIE11) {
+      pageWindow.removeEventListener('popstate', onpopstate, false);
       pageWindow.addEventListener('hashchange', onpopstate, false);
     }
     if (!dispatch) return;
