@@ -61,7 +61,10 @@ function createRouteComponentTransitionMiddleware (routemap) {
       var parentTransition = get(routemap, "transition")
 
       var childRoutename = context.names[0]
-      var childRoutemap = find(routemap.children, function(route) { route.name === childRoutename })
+      var childRoutemap = find(
+        routemap.children,
+        function(route) { return route.name === childRoutename }
+      )
       var childTransition = get(childRoutemap, "transition")
 
       var transition = defaults(
@@ -94,7 +97,8 @@ function createRouteComponentTransitionMiddleware (routemap) {
       routemap.component,
       {
         ref: function (ref) { if (ref) context.refs[routemap.name] = ref },
-      }, element
+      },
+      element
     )
 
     next()
