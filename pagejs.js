@@ -235,6 +235,8 @@
   page.stop = function() {
     if (!running) return;
     page.current = '';
+    page.callbacks = [];
+    page.exits = [];
     page.len = 0;
     running = false;
     hasDocument && pageWindow.document.removeEventListener(clickEvent, onclick, false);
